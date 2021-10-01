@@ -1,0 +1,156 @@
+
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="shortcut icon" type="image/x-icon" href="../assets/img/65844_18063020204554.png">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+        <title>Covid Form</title>
+    </head>
+
+    <body style="background-color: #353538;">
+
+<font face="Itim">
+    
+        <div class="d-flex vh-100" >
+            <div style="width: 600px; height: 600px; background-color: #1A1A1A; border-radius: 24px; padding:45px 50px 77px 50px;" class="mx-auto align-self-center">
+            <h1 style="color: aliceblue; font-size: 35px; text-align: center ;">บันทึกข้อมูลผู้ป่วยโควิดประจำวัน</h1><br><br>
+                <div class='col' style="padding: 0px" >
+                <label style="color: aliceblue; font-size: 25px">วันที่</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type='date' name='date' id='date' style="width: 432px; height: 40px;"  />
+            </div><br>
+            <div class='col' style="padding: 0px">
+                <label style="color: aliceblue; font-size: 25px" >ผู้ติดเชื้อรายใหม่</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type='number' name='infect' id='infect' style="width: 312px ; height: 40px;" />
+            </div><br>
+            <div class='col' style="padding: 0px">
+                <label style="color: aliceblue; font-size: 25px">หายแล้ว</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type='number' name='recovered' id='recovered'  style="width: 392px ; height: 40px;"/>
+            </div><br>
+            <div clas='col' style="padding: 0px">
+                <label style="color: aliceblue; font-size: 25px">เสียชีวิต</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type='number' name='death' id='death' style="width: 392px ; height: 40px;" />
+            </div><br>
+            <div class='col' style="padding: 0px">
+                <label style="color: aliceblue; font-size: 25px">แผนกวิชา</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <select id="htc" style="width: 371px; height: 38px;" required>
+                    <option value="">
+                        -------------------จงเลือกแผนกวิชา-------------------
+                    </option>
+                    <option value="แผนกเทคนิคเครื่องมือกล">
+                        แผนกเทคนิคเครื่องมือกล
+                    </option>
+                    <option value="แผนกเทคนิคพลังงาน">
+                        แผนกเทคนิคพลังงาน
+                    </option>
+                    <option value="แผนกเทคโนโลยีเครื่องมือวัดและควบคุมงานปิโตรเลียม">
+                        แผนกเทคโนโลยีเครื่องมือวัดและควบคุมงานปิโตรเลียม
+        
+                    </option><option value="แผนกช่างก่อสร้าง">
+                        แผนกช่างก่อสร้าง
+        
+        
+                    </option><option value="แผนกก่อสร้างและโยธา">
+                        แผนกก่อสร้างและโยธา
+        
+                    </option><option value="แผนกเครื่องเรือนและตกแต่งภายใน">
+                        แผนกเครื่องเรือนและตกแต่งภายใน
+                    </option><option value="แผนกสำรวจ">
+                        แผนกสำรวจ
+        
+                    </option><option value="แผนกช่างเทคนิคสถาปัตยกรรม">
+                        แผนกช่างเทคนิคสถาปัตยกรรม
+        
+                    </option><option value="แผนกเทคนิคยานยนต์">
+                        แผนกเทคนิคยานยนต์
+                    </option><option value="แผนกช่างกลโรงงาน">
+                        แผนกช่างกลโรงงาน
+                    </option>
+                    
+                    <option value="แผนกช่างเทคนิคพื้นฐาน">
+                        แผนกช่างเทคนิคพื้นฐาน
+                    </option>
+                    <option value="แผนกช่างไฟฟ้ากำลัง">
+                        แผนกช่างไฟฟ้ากำลัง
+                    </option>
+                    <option value="แผนกอิเล็กทรอนิกส์">
+                        แผนกอิเล็กทรอนิกส์ 
+                    </option>
+                    <option value="แผนกการจัดการโลจิสติกส์">
+                        แผนกการจัดการโลจิสติกส์
+                    </option>
+                    <option value="แผนกเครื่องปรับอากาศและทำความเย็น">
+                        แผนกเครื่องปรับอากาศและทำความเย็น
+                    </option>
+                    <option value="แผนกเทคโนโลยีสารสนเทศและการสื่อสาร">
+                        แผนกเทคโนโลยีสารสนเทศและการสื่อสาร
+        
+                    </option>
+                </select>
+            </div><br>
+            
+            
+
+            <div class='btn btn-success' onclick='submitCovidData()' style="width: 500px">บันทึกยอดผู้ป่วย</div>
+            <div style="padding: 10px 0px 0px 395px; text-align: right;"><font style="color: #CFCFCF; font-size: 20px; text-decoration-color: transparent ;"><a style="color: white;" href="http://localhost/html/Edit/admin_list.php">ย้อนกลับ</a></div></a>
+        </div></div></font></font>
+        <script>
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            function submitCovidData() {
+                $.get('/CovidAPI/updateCovidData.php', {
+                    token: getCookie('token'),
+                    date: $('#date').val(),
+                    infect: $('#infect').val(),
+                    recovered: $('#recovered').val(),
+                    death: $('#death').val(),
+                    htc: $('#htc').val()
+
+                }).then((res) => {
+                    if (res == 'success') {
+                        alert('บันทึกข้อมูลผู้ป่วยโควิดสำเร็จ');
+                    } else {
+                        alert('เกิดข้อผิดพลาด');
+                        console.log('aasd')
+                    }
+                })
+            }
+
+            $(document).ready(function(){
+                if(getCookie('token')==''){
+                    window.location.href='./login.html'
+                }
+            })
+
+            
+        </script>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <link rel="shortcut icon" type="image/x-icon" href="../assets/img/65844_18063020204554.png">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<font face="Itim">
+        <title>Login</title>
+    </head>
+
+    <body style="background-color: #353538;">
+        <div class="d-flex vh-100">
+        <div style="width: 500px; height: 400px; background-color: #1A1A1A; border-radius: 24px; padding:45px 50px 77px 50px;" class="mx-auto align-self-center">
+            <div class='col'>
+                <h1 style="color:aliceblue; text-align: center;">Login <br></h1>
+                <label></label>
+                <input class='form-control' type='text' name='username' id='username' placeholder="Username" />
+            </div>
+            <div class='col'>
+                <label></label>
+                <input class='form-control' type='password' name='password' id='password' placeholder="Password" />
+            </div><br><br>
+            <div  class='btn btn-success col' onclick='submitLogin()'>Login</div>
+            <div style="padding: 30px 0px 0px 292px;"><font style="color: #CFCFCF; font-size: 20px; text-decoration-color: transparent ;"><a style="color: white;" href="http://localhost/html/">กลับหน้าหลัก</div></a>
+        </div></div></font></font>
+        <script>
+            function submitLogin() {
+                $.post('/CovidAPI/Login.php', {
+                    username: $('#username').val(),
+                    password: $('#password').val()
+                }).then((res) => {
+                    
+                    var resp = JSON.parse(res);
+                    if (resp.token) {
+                        
+                        document.cookie = 'token=' + resp.token;
+                        window.location.href='./Edit/admin_list.php';
+                    } else {
+                        alert('ล็อกอินไม่สำเร็จ');
+                        console.log('aasd')
+                    }
+                })
+            }
+        </script>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </body>
+</html>
