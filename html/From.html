@@ -1,156 +1,462 @@
+<!DOCTYPE html>
+<html lang="th">
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>บันทึกข้อมูล COVID-19 — Covid HTC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<!doctype html>
-<html lang="en">
+        :root {
+            --bg: #0D0D0F;
+            --card: #161618;
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #00C96E;
+            --accent-d: #00A859;
+            --text: #F0F0F5;
+            --muted: #8A8A9A;
+            --danger: #E85D5D;
+            --warn: #F5A623;
+            --info: #4C9EEB;
+            --radius: 16px;
+        }
 
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        body {
+            font-family: 'Noto Sans Thai', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="shortcut icon" type="image/x-icon" href="../assets/img/65844_18063020204554.png">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        /* TOPBAR */
+        .topbar {
+            height: 64px;
+            background: rgba(13, 13, 15, 0.9);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(12px);
+        }
 
-        <title>Covid Form</title>
-    </head>
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 10px;
+            transition: background 0.15s, color 0.15s;
+        }
 
-    <body style="background-color: #353538;">
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+        }
 
-<font face="Itim">
-    
-        <div class="d-flex vh-100" >
-            <div style="width: 600px; height: 600px; background-color: #1A1A1A; border-radius: 24px; padding:45px 50px 77px 50px;" class="mx-auto align-self-center">
-            <h1 style="color: aliceblue; font-size: 35px; text-align: center ;">บันทึกข้อมูลผู้ป่วยโควิดประจำวัน</h1><br><br>
-                <div class='col' style="padding: 0px" >
-                <label style="color: aliceblue; font-size: 25px">วันที่</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type='date' name='date' id='date' style="width: 432px; height: 40px;"  />
-            </div><br>
-            <div class='col' style="padding: 0px">
-                <label style="color: aliceblue; font-size: 25px" >ผู้ติดเชื้อรายใหม่</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type='number' name='infect' id='infect' style="width: 312px ; height: 40px;" />
-            </div><br>
-            <div class='col' style="padding: 0px">
-                <label style="color: aliceblue; font-size: 25px">หายแล้ว</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type='number' name='recovered' id='recovered'  style="width: 392px ; height: 40px;"/>
-            </div><br>
-            <div clas='col' style="padding: 0px">
-                <label style="color: aliceblue; font-size: 25px">เสียชีวิต</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type='number' name='death' id='death' style="width: 392px ; height: 40px;" />
-            </div><br>
-            <div class='col' style="padding: 0px">
-                <label style="color: aliceblue; font-size: 25px">แผนกวิชา</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <select id="htc" style="width: 371px; height: 38px;" required>
-                    <option value="">
-                        -------------------จงเลือกแผนกวิชา-------------------
-                    </option>
-                    <option value="แผนกเทคนิคเครื่องมือกล">
-                        แผนกเทคนิคเครื่องมือกล
-                    </option>
-                    <option value="แผนกเทคนิคพลังงาน">
-                        แผนกเทคนิคพลังงาน
-                    </option>
-                    <option value="แผนกเทคโนโลยีเครื่องมือวัดและควบคุมงานปิโตรเลียม">
-                        แผนกเทคโนโลยีเครื่องมือวัดและควบคุมงานปิโตรเลียม
-        
-                    </option><option value="แผนกช่างก่อสร้าง">
-                        แผนกช่างก่อสร้าง
-        
-        
-                    </option><option value="แผนกก่อสร้างและโยธา">
-                        แผนกก่อสร้างและโยธา
-        
-                    </option><option value="แผนกเครื่องเรือนและตกแต่งภายใน">
-                        แผนกเครื่องเรือนและตกแต่งภายใน
-                    </option><option value="แผนกสำรวจ">
-                        แผนกสำรวจ
-        
-                    </option><option value="แผนกช่างเทคนิคสถาปัตยกรรม">
-                        แผนกช่างเทคนิคสถาปัตยกรรม
-        
-                    </option><option value="แผนกเทคนิคยานยนต์">
-                        แผนกเทคนิคยานยนต์
-                    </option><option value="แผนกช่างกลโรงงาน">
-                        แผนกช่างกลโรงงาน
-                    </option>
-                    
-                    <option value="แผนกช่างเทคนิคพื้นฐาน">
-                        แผนกช่างเทคนิคพื้นฐาน
-                    </option>
-                    <option value="แผนกช่างไฟฟ้ากำลัง">
-                        แผนกช่างไฟฟ้ากำลัง
-                    </option>
-                    <option value="แผนกอิเล็กทรอนิกส์">
-                        แผนกอิเล็กทรอนิกส์ 
-                    </option>
-                    <option value="แผนกการจัดการโลจิสติกส์">
-                        แผนกการจัดการโลจิสติกส์
-                    </option>
-                    <option value="แผนกเครื่องปรับอากาศและทำความเย็น">
-                        แผนกเครื่องปรับอากาศและทำความเย็น
-                    </option>
-                    <option value="แผนกเทคโนโลยีสารสนเทศและการสื่อสาร">
-                        แผนกเทคโนโลยีสารสนเทศและการสื่อสาร
-        
-                    </option>
-                </select>
-            </div><br>
-            
-            
+        .topbar-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
 
-            <div class='btn btn-success' onclick='submitCovidData()' style="width: 500px">บันทึกยอดผู้ป่วย</div>
-            <div style="padding: 10px 0px 0px 395px; text-align: right;"><font style="color: #CFCFCF; font-size: 20px; text-decoration-color: transparent ;"><a style="color: white;" href="http://localhost/html/Edit/admin_list.php">ย้อนกลับ</a></div></a>
-        </div></div></font></font>
-        <script>
-            function getCookie(cname) {
-                let name = cname + "=";
-                let decodedCookie = decodeURIComponent(document.cookie);
-                let ca = decodedCookie.split(';');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
+        /* MAIN */
+        .main {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 48px 24px;
+            min-height: calc(100vh - 64px);
+        }
+
+        .form-card {
+            width: 100%;
+            max-width: 560px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 40px;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .form-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-d));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .form-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .form-header p {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            pointer-events: none;
+            color: var(--muted);
+        }
+
+        input,
+        select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 13px 14px 13px 44px;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 15px;
+            color: var(--text);
+            transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input::placeholder {
+            color: var(--muted);
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--accent);
+            background: rgba(0, 201, 110, 0.06);
+            box-shadow: 0 0 0 3px rgba(0, 201, 110, 0.15);
+        }
+
+        select option {
+            background: #1C1C1F;
+            color: var(--text);
+        }
+
+        .stat-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .stat-inputs .form-group {
+            margin-bottom: 0;
+        }
+
+        .stat-inputs label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-inputs .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-info {
+            background: var(--info);
+        }
+
+        .dot-green {
+            background: var(--accent);
+        }
+
+        .dot-danger {
+            background: var(--danger);
+        }
+
+        .stat-inputs input {
+            padding-left: 14px;
+            text-align: center;
+        }
+
+        .btn-submit {
+            width: 100%;
+            margin-top: 8px;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-d));
+            border: none;
+            border-radius: 12px;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(0, 201, 110, 0.35);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 28px rgba(0, 201, 110, 0.45);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit .btn-loader {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto;
+        }
+
+        .btn-submit.loading span {
+            display: none;
+        }
+
+        .btn-submit.loading .btn-loader {
+            display: block;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .toast {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-top: 16px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toast.success {
+            display: flex;
+            background: rgba(0, 201, 110, 0.12);
+            border: 1px solid rgba(0, 201, 110, 0.3);
+            color: var(--accent);
+        }
+
+        .toast.error {
+            display: flex;
+            background: rgba(232, 93, 93, 0.12);
+            border: 1px solid rgba(232, 93, 93, 0.3);
+            color: var(--danger);
+        }
+
+        @media (max-width: 520px) {
+            .form-card {
+                padding: 28px 20px;
             }
 
-            function submitCovidData() {
-                $.get('/CovidAPI/updateCovidData.php', {
-                    token: getCookie('token'),
-                    date: $('#date').val(),
-                    infect: $('#infect').val(),
-                    recovered: $('#recovered').val(),
-                    death: $('#death').val(),
-                    htc: $('#htc').val()
+            .stat-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
 
-                }).then((res) => {
-                    if (res == 'success') {
-                        alert('บันทึกข้อมูลผู้ป่วยโควิดสำเร็จ');
+<body>
+    <header class="topbar">
+        <a href="./Edit/admin_list.php" class="back-btn">← ย้อนกลับ</a>
+        <span class="topbar-title">บันทึกข้อมูลผู้ป่วย COVID-19</span>
+    </header>
+
+    <main class="main">
+        <div class="form-card">
+            <div class="form-header">
+                <div class="form-icon">📋</div>
+                <div>
+                    <h1>บันทึกข้อมูลประจำวัน</h1>
+                    <p>กรอกข้อมูลผู้ป่วย COVID-19 แยกตามแผนกวิชา</p>
+                </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label>วันที่บันทึก</label>
+                <div class="input-wrap">
+                    <span class="input-icon">📅</span>
+                    <input type="date" id="date" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>แผนกวิชา</label>
+                <div class="input-wrap">
+                    <span class="input-icon">🏫</span>
+                    <select id="htc" required>
+                        <option value="">— เลือกแผนกวิชา —</option>
+                        <option>แผนกเทคนิคเครื่องมือกล</option>
+                        <option>แผนกเทคนิคพลังงาน</option>
+                        <option>แผนกเทคโนโลยีเครื่องมือวัดและควบคุมงานปิโตรเลียม</option>
+                        <option>แผนกช่างก่อสร้าง</option>
+                        <option>แผนกก่อสร้างและโยธา</option>
+                        <option>แผนกเครื่องเรือนและตกแต่งภายใน</option>
+                        <option>แผนกสำรวจ</option>
+                        <option>แผนกช่างเทคนิคสถาปัตยกรรม</option>
+                        <option>แผนกเทคนิคยานยนต์</option>
+                        <option>แผนกช่างกลโรงงาน</option>
+                        <option>แผนกช่างเทคนิคพื้นฐาน</option>
+                        <option>แผนกช่างไฟฟ้ากำลัง</option>
+                        <option>แผนกอิเล็กทรอนิกส์</option>
+                        <option>แผนกการจัดการโลจิสติกส์</option>
+                        <option>แผนกเครื่องปรับอากาศและทำความเย็น</option>
+                        <option>แผนกเทคโนโลยีสารสนเทศและการสื่อสาร</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>จำนวนผู้ป่วย</label>
+                <div class="stat-inputs">
+                    <div class="form-group">
+                        <label><span class="dot dot-info"></span>ติดเชื้อใหม่</label>
+                        <input type="number" id="infect" min="0" value="0" />
+                    </div>
+                    <div class="form-group">
+                        <label><span class="dot dot-green"></span>หายแล้ว</label>
+                        <input type="number" id="recovered" min="0" value="0" />
+                    </div>
+                    <div class="form-group">
+                        <label><span class="dot dot-danger"></span>เสียชีวิต</label>
+                        <input type="number" id="death" min="0" value="0" />
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-submit" id="submitBtn" onclick="submitData()">
+                <span>✅ บันทึกข้อมูล</span>
+                <div class="btn-loader"></div>
+            </button>
+
+            <div class="toast" id="toast"></div>
+        </div>
+    </main>
+
+    <script>
+        // Set today's date by default
+        const today = new Date();
+        const iso = today.toISOString().split('T')[0];
+        document.getElementById('date').value = iso;
+
+        function showToast(type, msg) {
+            const t = document.getElementById('toast');
+            t.className = 'toast ' + type;
+            t.innerHTML = (type === 'success' ? '✅ ' : '⚠️ ') + msg;
+        }
+
+        function submitData() {
+            const btn = document.getElementById('submitBtn');
+            const date = document.getElementById('date').value;
+            const htc = document.getElementById('htc').value;
+            const infect = document.getElementById('infect').value;
+            const recovered = document.getElementById('recovered').value;
+            const death = document.getElementById('death').value;
+
+            if (!date || !htc) {
+                showToast('error', 'กรุณาเลือกวันที่และแผนกวิชา');
+                return;
+            }
+
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            const fd = new FormData();
+            fd.append('date', date);
+            fd.append('htc', htc);
+            fd.append('infect', infect);
+            fd.append('recovered', recovered);
+            fd.append('death', death);
+
+            fetch('/Covid19/covid.htc.github.io/CovidAPI/updateCovidData.php', {
+                method: 'POST',
+                body: fd
+            })
+                .then(r => r.json())
+                .then(resp => {
+                    if (resp.success) {
+                        showToast('success', resp.message || 'บันทึกข้อมูลสำเร็จ');
+                        document.getElementById('infect').value = 0;
+                        document.getElementById('recovered').value = 0;
+                        document.getElementById('death').value = 0;
+                        document.getElementById('htc').value = '';
                     } else {
-                        alert('เกิดข้อผิดพลาด');
-                        console.log('aasd')
+                        showToast('error', resp.message || 'เกิดข้อผิดพลาด');
+                        if (resp.message && resp.message.includes('เข้าสู่ระบบ')) {
+                            setTimeout(() => window.location.href = './login.html', 1500);
+                        }
                     }
                 })
-            }
-
-            $(document).ready(function(){
-                if(getCookie('token')==''){
-                    window.location.href='./login.html'
-                }
-            })
-
-            
-        </script>
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </body>
+                .catch(() => showToast('error', 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้'))
+                .finally(() => {
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                });
+        }
+    </script>
+</body>
 
 </html>
